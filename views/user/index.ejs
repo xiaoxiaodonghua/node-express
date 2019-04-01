@@ -41,23 +41,23 @@
                                 </th>
                                 <% colList.forEach(function(c){%>
                                     <% const temUser = users.find(u=>{
-																		return u.row_id==r.id && u.col_id==c.id
-																		});
-																		let isGirl = false;
-																		if(temUser){
-																			isGirl = temUser.gender=='女'?true:false;
-																		}
-																		%>
-                                        <td class="<%= isGirl?'alert alert-danger':''%>">
-                                            <%= temUser?temUser.name:'' %>
-                                                <%if(temUser){%>
-                                                    <a href="/users/edit?id=<%= temUser.id %>" class="btn1"><i class="btn btn-info btn-sm fa fa-edit"></i></a>
-                                                    <a onclick="delOne('<%= temUser.id %>')" class="btn2"><i class="btn btn-danger btn-sm fa fa-trash-o"></i></a>
-                                                    <%}%>
-                                        </td>
-                                        <%})%>
+										return u.row_id==r.id && u.col_id==c.id
+									});
+									let isGirl = false;
+                                    if(temUser){
+                                        isGirl = temUser.gender=='女'?true:false;
+                                    }
+                                %>
+                                <td class="<%= isGirl?'alert alert-danger':''%>">
+                                    <%= temUser?temUser.name:'' %>
+                                        <%if(temUser){%>
+                                            <a href="/users/edit?id=<%= temUser.id %>" class="btn1"><i class="btn btn-info btn-sm fa fa-edit"></i></a>
+                                            <a onclick="delOne('<%= temUser.id %>')" class="btn2"><i class="btn btn-danger btn-sm fa fa-trash-o"></i></a>
+                                        <%}%>
+                                </td>   
+                                <%})%>       
                             </tr>
-                            <%})%>
+                        <%})%>
                     </tbody>
                 </table>
             </div>
