@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../layout/admin/header %>
+        <title>注册页面</title>
+</head>
+
+<body class="gray-bg">
+    <div class="container wrapper wrapper-content animated fadeInRight">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <%if(isedit){%>
+                    <h3 class="panel-title">注册-修改</h3>
+                    <%} else{%>
+                        <h3 class="panel-title">注册</h3>
+                        <%}%>
+
+            </div>
+            <div class="panel-body">
+                <%if(isedit){%>
+                    <form method="POST" role="form" action="/users/edit/<%= user.id %>">
+                        <%} else{%>
+                            <form method="POST" role="form" action="/users/reg">
+                                <%}%>
+
+                                    <div class="form-group">
+                                        <label>姓名</label>
+                                        <input type="text" class="form-control" name="name" placeholder="请输入姓名" required value="<%= user.name %>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>性别</label>
+                                        <select class="form-control" name="gender">
+														<option value="男"<%= user.gender=='男'?'selected':''%>>男</option>
+														<option value="女"<%= user.gender=='女'?'selected':''%>>女</option>
+												</select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>排</label>
+                                        <%if(isedit){%>
+                                            <select class="form-control" disabled>
+																							<% rowList.forEach(function(item){%>
+																								<option value="<%= item.id %>" <%= user.row_id==item.id?'selected':'' %>><%= item.name %></option>
+																								<%})%>
+																							</select>
+                                            <%} else{%>
+                                                <select class="form-control" name="row_id">
+																								<% rowList.forEach(function(item){%>
+																									<option value="<%= item.id %>"><%= item.name %></option>
+																									<%})%>
+																								</select>
+                                                <%}%>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>列</label>
+                                        <%if(isedit){%>
+                                            <select class="form-control" disabled>
+																						<% colList.forEach(function(item){%>
+																							<option value="<%= item.id %>" <%= user.col_id==item.id?'selected':'' %>><%= item.name %></option>
+																							<%})%>
+																						</select>
+                                            <%} else{%>
+                                                <select class="form-control" name="col_id">
+																							<% colList.forEach(function(item){%>
+																								<option value="<%= item.id %>"><%= item.name %></option>
+																								<%})%>
+																							</select>
+                                                <%}%>
+                                    </div>
+                                    <button type="submit" class="btn btn-success btn-block">注册</button>
+                            </form>
+
+            </div>
+        </div>
+    </div>
+    <% include ../layout/admin/footer %>
+        <script>
+            $('form').submit(function(ev) {
+                console.log(444444)
+                ev.preventDefault()
+                $.post(
+                    $(this).attr('action'),
+                    $(this).serialize(),
+                    (res) => {
+                        alert(res.msg)
+                        if (res.status == 'y') location.href = '/users'
+                    }
+                )
+            })
+            $(function() {
+
+            })
+        </script>
+</body>
+
+</html>

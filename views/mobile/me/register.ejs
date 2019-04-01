@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <% include ../../layout/mobile/header %>
+        <title>注册</title>
+</head>
+
+<body>
+    <div class="page">
+        <div class="header">
+            <h3>注册新用户</h3>
+        </div>
+    </div>
+    <form action="" id="mainForm" style="margin-top:50px;margin-bottom:70px;">
+        <div class="page">
+            <div class="page__bd">
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">头像</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <img src="/default.jpg" id="imgCtrl" alt="图片" style="width:200px;max-height:200px;">
+                            <input name="img" id="img" type="hidden" class="form-control" placeholder="请上传头像">
+                            <a href="javascript:void(0)" value="上传" id="uploadButton">上传</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">用户名</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text" placeholder="请输入用户名" id="user_name" name="user_name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">邮箱</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="email" placeholder="请输入邮箱" id="email" name="email" />
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">手机号</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="tel" placeholder="请输入手机号" id="mobile" name="mobile" />
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">密码</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="password" placeholder="请输入密码" id="user_pwd" name="user_pwd" />
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">重复密码</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="password" placeholder="请再次输入密码" name="user_pwd1" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">姓名</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text" placeholder="请输入姓名" id="name" name="name" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">昵称</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text" placeholder="请输入昵称" id="nick_name" name="nick_name" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell weui-cell_switch">
+                        <div class="weui-cell__bd">标题文字</div>
+                        <div class="weui-cell__ft">
+                            <input class="weui-switch" type="checkbox" />
+                        </div>
+                    </div>
+                    <div class="weui-cell weui-cell_switch">
+                        <div class="weui-cell__bd">兼容IE Edge的版本</div>
+                        <div class="weui-cell__ft">
+                            <label for="switchCP" class="weui-switch-cp">
+										<input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked"/>
+										<div class="weui-switch-cp__box"></div>
+								</label>
+                        </div>
+                    </div>
+                </div>
+
+                <label for="weuiAgree" class="weui-agree">
+				<input id="weuiAgree" type="checkbox" class="weui-agree__checkbox"/>
+				<span class="weui-agree__text">
+						阅读并同意<a href="javascript:void(0);">《相关条款》</a>
+				</span>
+		</label>
+
+                <div class="weui-btn-area">
+                    <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
+                </div>
+            </div>
+        </div>
+    </form>
+    <% const home = '/mobile/' %>
+        <% const shop = '/mobile/goods' %>
+            <% const goShop = 'javascript:;' %>
+                <% const me = 'javascript:;' %>
+                    <% include ../../layout/mobile/navbr %>
+                        <% include ../../layout/mobile/footer %>
+                            <% include ../../layout/admin/footer %>
+
+                                <script type="text/javascript">
+                                    KindEditor.ready(function(K) {
+                                        var editor1 = K.create('textarea[name="content"]', {
+                                            uploadJson: '/common/kindeditor/uploadImg' //处理文件上传的服务器地址
+                                        });
+                                        var uploadbutton = K.uploadbutton({
+                                            button: K('#uploadButton')[0],
+                                            fieldName: 'imgFile',
+                                            url: '/common/kindeditor/uploadImg',
+                                            afterUpload: function(data) {
+                                                if (data.error === 0) {
+                                                    var url = data.url;
+                                                    K('#img').val(url);
+                                                    K('#imgCtrl').attr('src', url);
+                                                } else {
+                                                    alert(data.message);
+                                                }
+                                            },
+                                            afterError: function(str) {
+                                                alert('自定义错误信息: ' + str);
+                                            }
+                                        });
+                                        uploadbutton.fileBox.change(function(e) {
+                                            uploadbutton.submit();
+                                        });
+                                        // 修改单独上传文件插件的样式
+                                        var upBtn = $('.ke-button').attr('class', '');
+                                        upBtn.addClass('btn btn-danger btn-sm ignore');
+                                        $('.ke-button-common').height('auto');
+                                        $('.ke-form').width('50px');
+                                    });
+                                    $(function() {
+                                        $('#mainForm').validate({
+                                            ignore: '.ignore,[type="file"]',
+                                            rules: {
+                                                user_name: {
+                                                    required: true,
+                                                    minlength: 3,
+                                                    //remote  远程验证，成功返回true，否则返回false
+                                                    // 默认发送get请求，把当前输入框中的内容传递到服务器
+                                                    remote: '/api/v1/validate/member_user_name'
+                                                },
+                                                email: {
+                                                    required: true,
+                                                    email: true,
+                                                    remote: '/api/v1/validate/member_email'
+                                                },
+                                                mobile: {
+                                                    required: true,
+                                                    isMobile: true, //使用自定义验证规则
+                                                    remote: '/api/v1/validate/member_mobile'
+                                                },
+                                                user_pwd: {
+                                                    required: true,
+                                                    isPwd: true,
+                                                },
+                                                user_pwd1: {
+                                                    required: true,
+                                                    isPwd: true,
+                                                    equalTo: '#user_pwd',
+                                                },
+                                                name: {
+                                                    required: true,
+                                                    minlength: 2,
+                                                },
+                                                img: {
+                                                    // required: true,
+                                                },
+                                                nick_name: {
+                                                    required: true,
+                                                    minlength: 1,
+                                                }
+                                            },
+                                            messages: {
+                                                user_name: {
+                                                    remote: '该用户已经存在'
+                                                },
+                                                email: {
+                                                    remote: '该邮箱已被注册'
+                                                },
+                                                mobile: {
+                                                    remote: '该手机号已经被注册'
+                                                },
+                                                user_pwd1: {
+                                                    equalTo: '两次密码输入不一致'
+                                                }
+                                            }
+                                        })
+                                        $('#showTooltips').click(function() {
+                                            var user_name = $('#user_name').val()
+                                            var email = $('#email').val()
+                                            var mobile = $('#mobile').val()
+                                            var user_pwd = $('#user_pwd').val()
+                                            var img = $('#img').val()
+                                            var name = $('#name').val()
+                                            var nick_name = $('#nick_name').val()
+                                            $.ajax({
+                                                type: 'post',
+                                                url: '/mobile/me/register',
+                                                data: {
+                                                    user_name,
+                                                    email,
+                                                    mobile,
+                                                    user_pwd,
+                                                    img,
+                                                    name,
+                                                    nick_name
+                                                },
+                                                dataType: 'json',
+                                                success: function(res) {
+                                                    alert(res.msg)
+                                                    if (res.status == 'y') {
+                                                        location.href = '/mobile/me/signin'
+                                                    }
+                                                }
+                                            })
+                                        })
+                                    })
+                                </script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <% include ../../layout/mobile/header %>
+        <title>注册</title>
+</head>
+
+<body>
+    <div class="page">
+        <div class="header">
+            <h3>登录</h3><i class="fa fa-plus" style="color:white;position:absolute;right:20px;top:16px;font-size:18px;cursor:pointer;" onclick="location.href='/mobile/me/register'">  注册</i>
+        </div>
+    </div>
+
+    <form action="" id="mainForm" style="margin-top:100px;margin-bottom:70px;">
+        <div class="page">
+            <div class="page__bd">
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">用户名</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text" placeholder="请输入用户名" id="user_name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">密码</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="password" placeholder="请输入密码" id="user_pwd" />
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cells weui-cells_form">
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
+            </div>
+        </div>
+        </div>
+    </form>
+    <% const home = '/mobile/' %>
+        <% const shop = '/mobile/goods' %>
+            <% const goShop = 'javascript:;' %>
+                <% const me = 'javascript:;' %>
+                    <% include ../../layout/mobile/navbr %>
+                        <% include ../../layout/mobile/footer %>
+                            <% include ../../layout/admin/footer %>
+
+                                <script type="text/javascript">
+                                    $(function() {
+                                        $('#showTooltips').click(function() {
+                                            var userName = $('#user_name').val().trim()
+                                            var user_pwd = $('#user_pwd').val().trim()
+                                            $.ajax({
+                                                type: 'post',
+                                                url: '/mobile/me/signin',
+                                                data: {
+                                                    userName,
+                                                    user_pwd,
+                                                },
+                                                dataType: 'json',
+                                                success: function(res) {
+                                                    alert(res.msg)
+                                                    if (res.status == 'y') {
+                                                        location.href = '/mobile/me'
+                                                    }
+                                                }
+                                            })
+                                        })
+                                    })
+                                </script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../layout/admin/header %>
+        <title>列数据</title>
+</head>
+
+<body class="gray-bg">
+    <div class=" container wrapper wrapper-content animated fadeInRight">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">列数据</h3>
+            </div>
+            <div class="panel-body">
+                <a class="btn btn-success " href="/admin/cols/add">新增</a>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>名字</th>
+                            <th>描述</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% list.forEach(function(item,index){%>
+                            <tr>
+                                <td>
+                                    <%= index+1 %>
+                                </td>
+                                <td>
+                                    <%= item.name %>
+                                </td>
+                                <td>
+                                    <%= item.description%>
+                                </td>
+                            </tr>
+                            <%})%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../layout/admin/header %>
+        <title>商品信息数据</title>
+</head>
+
+<body class="gray-bg">
+    <div class="container wrapper wrapper-content animated fadeInRight">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">商品信息数据</h3>
+            </div>
+            <div class="panel-body">
+                <a class="btn btn-warning " href="/admin/goods/add">新增</a>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>商品名</th>
+                            <th>类别</th>
+                            <th>图片</th>
+                            <th>价格</th>
+                            <th>库存</th>
+                            <th>描述</th>
+                            <!-- <th>详情</th> -->
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% list.forEach(function(item,index){%>
+                            <tr>
+                                <td>
+                                    <%= index+1 %>
+                                </td>
+                                <td>
+                                    <%= item.name %>
+                                </td>
+                                <td>
+                                    <%= item.goods_type?item.goods_type.name:'' %>
+                                </td>
+                                <td><img style="width:100px;max-height:120px;" src="<%= item.img %>" class="thumbnail" /></td>
+                                <td>
+                                    <%= item.price %>
+                                </td>
+                                <td>
+                                    <%= item.store_count %>
+                                </td>
+                                <td>
+                                    <%= item.description %>
+                                </td>
+                                <!-- <td>
+																			<%- item.content %>
+																	</td> -->
+                                <td>
+                                    <a href="/admin/goods/edit?id=<%= item.id %>"><i class="btn btn-info btn-sm fa fa-edit"></i></a>
+                                    <a onclick="delOne('<%= item.id %>')"><i class="btn btn-danger btn-sm fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                            <%}) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <form action="/admin/goods/remove" style="display:none" method="POST" id="delForm">
+        <input type="text" name="id" id="delID">
+    </form>
+
+    <% const pageBaseUrl = '/admin/goods' %>
+        <% include ../../layout/admin/paging  %>
+            <% include ../../layout/admin/footer %>
+
+                <script>
+                    function delOne(id) {
+                        confirm('是否删除选中的信息？', function() {
+                            $('#delID').val(id)
+                            $('#delForm').submit()
+                        })
+                    }
+                </script>
+</body>
+
+</html>

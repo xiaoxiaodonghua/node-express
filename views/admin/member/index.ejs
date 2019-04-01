@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../layout/admin/header %>
+        <title>用户信息</title>
+</head>
+
+<body class="gray-bg">
+    <div class="container wrapper wrapper-content animated fadeInRight">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">用户信息</h3>
+            </div>
+            <div class="panel-body">
+                <a class="btn btn-info " href="/admin/members/add">新增</a>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>用户名</th>
+                            <th>手机号</th>
+                            <th>邮箱</th>
+                            <th>头像</th>
+                            <th>姓名</th>
+                            <th>昵称</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% list.forEach(function(item,index){%>
+                            <tr>
+                                <td>
+                                    <%= index+1 %>
+                                </td>
+                                <td onclick="showAddress('<%= item.id %>')">
+                                    <%= item.user_name %>
+                                </td>
+                                <td>
+                                    <%= item.mobile %>
+                                </td>
+                                <td>
+                                    <%= item.email %>
+                                </td>
+                                <td>
+                                    <img style="width:100px;max-height:120px;" src="<%= item.img %>" class="thumbnail" />
+                                </td>
+                                <td>
+                                    <%= item.name %>
+                                </td>
+                                <td>
+                                    <%= item.nick_name %>
+                                </td>
+                                <td>
+                                    <a href="/admin/members/edit?id=<%= item.id %>"><i class="btn btn-info btn-sm fa fa-edit"></i></a>
+                                    <a onclick="delOne('<%= item.id %>')"><i class="btn btn-danger btn-sm fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                            <%})%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    <form action="/admin/members/remove" style="display:none" method="POST" id="delForm">
+        <input type="text" name="id" id="delID">
+    </form>
+    <% const pageBaseUrl = '/admin/members' %>
+        <% include ../../layout/admin/paging  %>
+            <% include ../../layout/admin/footer  %>
+
+                <script>
+                    function delOne(id) {
+                        confirm('是否删除选中的信息？', function() {
+                            $('#delID').val(id)
+                            $('#delForm').submit()
+                        })
+                    }
+
+                    function showAddress(id) {
+                        layer.open({
+                            type: 2,
+                            title: '地址信息管理',
+                            shadeClose: true,
+                            shade: 0.8,
+                            area: ['80%', '60%'],
+                            content: '/admin/members_address/index/' + id //iframe的url
+                        })
+                    }
+                </script>
+</body>
+
+</html>

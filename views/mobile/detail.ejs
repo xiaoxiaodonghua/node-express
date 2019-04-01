@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <% include ../layout/mobile/header %>
+        <title>超级商城-首页</title>
+</head>
+
+<body>
+    <!-- <div class="page">
+        <div class="header">
+            <h3>超级商城</h3>
+        </div>
+    </div> -->
+    <div class="page">
+        <div class="page__hd">
+            <p class="page__desc">商品详情列表</p>
+        </div>
+    </div>
+    <div class="page__bd">
+        <article class="weui-article">
+            <h1 style="color:yellow ;background:gray; text-align:center; border-radius:5px;line-height:30px;">
+                <%= data.name %>
+            </h1>
+            <section>
+                <%- data.content %>
+            </section>
+
+        </article>
+    </div>
+    </div>
+    <% const home = '/mobile/' %>
+        <% const shop = '/mobile/goods' %>
+            <% const goShop = 'javascript:;' %>
+                <% const me = '/mobile/me' %>
+                    <% include ../layout/mobile/navbr %>
+                        <% include ../layout/mobile/footer %>
+                            <% include ../layout/mobile/seacher %>
+</body>
+
+</html>

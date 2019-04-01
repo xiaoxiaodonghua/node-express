@@ -1,0 +1,33 @@
+<div class="container text-center container wrapper wrapper-content animated fadeIn">
+    <div class="col-sm-2">
+        <div class="dataTables_info">共
+            <%= pageCount %>页数据
+        </div>
+    </div>
+    <!-- 分页 -->
+    <div class="col-sm-11">
+        <div class="btn-group">
+            <% if(page>1){ %>
+                <a href="/admin/users?page=<%= page-1 %>" class="btn btn-white" type="button"><i class="fa fa-chevron-left"></i></a>
+                <% }else{ %>
+                    <a href="#" class="btn btn-white" type="button"><i class="fa fa-chevron-left"></i></a>
+                    <% } %>
+                        <% pages.forEach(function(item){ %>
+                            <% if(item==page){%>
+                                <a href="#" class="btn btn-primary  active">
+                                    <%= item %>
+                                </a>
+                                <%}else{%>
+                                    <a href="/admin/users?page=<%= item %>" class="btn btn-white">
+                                        <%= item %>
+                                    </a>
+                                    <%} %>
+                                        <% }) %>
+                                            <% if(page<pageCount){ %>
+                                                <a href="/admin/users?page=<%= page+1 %>" class="btn btn-white" type="button"><i class="fa fa-chevron-right"></i></a>
+                                                <% }else{ %>
+                                                    <a href="#" class="btn btn-white" type="button"><i class="fa fa-chevron-right"></i></a>
+                                                    <% } %>
+        </div>
+    </div>
+</div>

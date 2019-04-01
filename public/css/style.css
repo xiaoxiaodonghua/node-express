@@ -1,0 +1,87 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    position: relative;
+}
+
+img {
+    max-width: 100%;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+.header {
+    z-index: 1000;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    text-align: center;
+}
+
+.header h3 {
+    line-height: 10px;
+    color: grey;
+}
+
+img {
+    width: 100%;
+}
+
+.banner {
+    width: 100%;
+}
+
+.weui-grid {
+    text-align: center;
+}
+
+.weui-grid__icon {
+    width: 80px;
+    height: 80px;
+    text-align: center;
+}
+
+.weui-grid__icon img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50% !important;
+}
+
+.page__hd,
+.weui-grid {
+    background-color: red;
+    color: white;
+}
+
+.page__hd {
+    border-radius: 5px;
+    height: 40px;
+}
+
+.red {
+    color: red;
+}
+
+.font {
+    font-size: 10px;
+}
+
+.page__desc {
+    line-height: 40px;
+    text-align: center
+}
+
+#show {
+    margin-bottom: 100px;
+}

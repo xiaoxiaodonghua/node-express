@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../layout/admin/header %>
+        <title>商品分类新增</title>
+</head>
+
+<body class="gray-bg">
+    <div class="container wrapper wrapper-content animated fadeInRight">
+        <!-- bs3-panel:danger  生成一个面板  红色头部的 -->
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">商品分类新增</h3>
+            </div>
+            <div class="panel-body">
+                <!-- bs3-form  生成一个表单 -->
+                <form method="POST" role="form">
+                    <div class="form-group">
+                        <label>类名</label>
+                        <input type="text" class="form-control" id="" placeholder="请输入类名" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label>描述</label>
+                        <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-block">保存</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../layout/admin/header %>
+        <title>座次表</title>
+        <style>
+            .red {
+                background-color: red;
+            }
+        </style>
+</head>
+
+<body class="gray-bg">
+    <div class=" container wrapper wrapper-content animated fadeInRight">
+        <div class="panel panel-info">
+            <div class="panel-heading ">
+                <h3 class="panel-title">座次表</h3>
+            </div>
+            <div class="panel-body">
+                <button class="btn btn-warning " onclick="location.href='/users/reg'">新增</button>
+                <button class="btn btn-info " onclick="showbtn(1)">修改个人信息</button>
+                <button class="btn btn-danger " onclick="showbtn(2)">删除个人信息</button>
+                <button class="btn btn-success " onclick="showbtn(3)">完成</button>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>排\号</th>
+                            <% colList.forEach(function(c){%>
+                                <th>
+                                    <%= c.name %>
+                                </th>
+                                <%})%>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% rowList.forEach(function(r){%>
+                            <tr>
+                                <th>
+                                    <%= r.name %>
+                                </th>
+                                <% colList.forEach(function(c){%>
+                                    <% const temUser = users.find(u=>{
+																		return u.row_id==r.id && u.col_id==c.id
+																		});
+																		let isGirl = false;
+																		if(temUser){
+																			isGirl = temUser.gender=='女'?true:false;
+																		}
+																		%>
+                                        <td class="<%= isGirl?'alert alert-danger':''%>">
+                                            <%= temUser?temUser.name:'' %>
+                                                <%if(temUser){%>
+                                                    <a href="/users/edit?id=<%= temUser.id %>" class="btn1"><i class="btn btn-info btn-sm fa fa-edit"></i></a>
+                                                    <a onclick="delOne('<%= temUser.id %>')" class="btn2"><i class="btn btn-danger btn-sm fa fa-trash-o"></i></a>
+                                                    <%}%>
+                                        </td>
+                                        <%})%>
+                            </tr>
+                            <%})%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <form action="/users/remove" style="display:none" method="POST" id="delForm">
+        <input type="text" name="id" id="delID">
+    </form>
+    <% include ../layout/admin/footer %>
+        <script>
+            function delOne(id) {
+                confirm('是否删除该人的信息？', function() {
+                    $('#delID').val(id)
+                    $('#delForm').submit()
+                })
+            }
+
+            function showbtn(a) {
+                if (a == 1) {
+                    $('.btn1').show()
+                }
+                if (a == 2) {
+                    $('.btn2').show()
+                }
+                if (a == 3) {
+                    $('.btn1').hide()
+                    $('.btn2').hide()
+                }
+            }
+            $('.btn1').hide()
+            $('.btn2').hide()
+        </script>
+</body>
+
+</html>

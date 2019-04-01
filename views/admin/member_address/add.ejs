@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../layout/admin/header %>
+        <title>用户地址新增</title>
+</head>
+
+<body class="gray-bg">
+    <div class="container wrapper wrapper-content animated fadeInRight">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">用户地址添加</h3>
+            </div>
+            <div class="panel-body">
+                <%if(isedit){%>
+                    <form id="mainForm" method="POST" action="/admin/members_address/edit/<%= model.id %>" role="form">
+                        <%} else{%>
+                            <form id="mainForm" method="POST" role="form">
+                                <%}%>
+
+                                    <div class="form-group">
+                                        <label>地址</label>
+                                        <select name="province" class="form-control"></select>
+                                        <select name="city" class="form-control"></select>
+                                        <select name="area" class="form-control"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>地址详情</label>
+                                        <input name="address_detail" class="form-control" value="<%= model.address_detail%>"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>是否默认</label>
+                                        <input type="radio" name="is_default" value="0" checked>否
+                                        <input type="radio" name="is_default" value="1">是
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">保存</button>
+                            </form>
+
+            </div>
+        </div>
+    </div>
+    <% include ../../layout/admin/footer  %>
+        <script language="javascript" defer>
+            $(function() {
+                $('input[name="is_default"][value="<%= model.is_default %>"]').prop('checked', true)
+                new PCAS("province", "city", "area", "<%= p %>", "<%= c %>", "<%= a %>");
+            })
+            $('#mainform').validate({
+                rules: {
+                    province: {
+                        required: true,
+                    },
+                    city: {
+                        required: true,
+                    },
+                    area: {
+                        required: true,
+                    },
+                    address_detail: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    province: {
+                        required: '省份信息不能为空!'
+                    },
+                    city: {
+                        required: '城市信息不能为空!'
+                    },
+                    area: {
+                        required: '地区信息不能为空!'
+                    },
+                }
+            })
+        </script>
+</body>
+
+</html>

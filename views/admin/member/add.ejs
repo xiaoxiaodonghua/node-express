@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../layout/admin/header %>
+        <title>用户新增</title>
+</head>
+
+<body class="gray-bg">
+    <div class="  container wrapper wrapper-content animated fadeInRight">
+        <!-- bs3-panel:danger  生成一个面板  红色头部的 -->
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <%if(isedit){%>
+                    <h3 class="panel-title">用户信息-修改</h3>
+                    <%} else{%>
+                        <h3 class="panel-title">用户添加</h3>
+                        <%}%>
+
+            </div>
+            <div class="panel-body">
+                <!-- bs3-form  生成一个表单 -->
+                <%if(isedit){%>
+                    <form method="POST" role="form" action="/admin/members/edit/<%= model.id %>" id="mainForm">
+                        <%} else{%>
+                            <form method="POST" id="mainForm" action="/admin/members/add">
+                                <%}%>
+                                    <div class="form-group">
+                                        <label>用户名</label>
+                                        <%if(isedit){%>
+                                            <span class="form-control"><%= model.user_name %></span>
+                                            <%} else{%>
+                                                <input type="text" class="form-control" id="" placeholder="请输入用户名" name="user_name">
+                                                <%}%>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>邮箱</label>
+                                        <%if(isedit){%>
+                                            <span class="form-control"><%= model.email %></span>
+                                            <%} else{%>
+                                                <input type="email" class="form-control" id="" placeholder="请输入邮箱" name="email">
+                                                <%}%>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>手机号</label>
+                                        <%if(isedit){%>
+                                            <span class="form-control"><%= model.mobile %></span>
+                                            <%} else{%>
+                                                <input type="text" class="form-control" id="" placeholder="请输入手机号" name="mobile" value="<%= model.mobile %>">
+                                                <%}%>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <%if(!isedit){%>
+                                            <label>密码</label>
+                                            <input type="password" class="form-control" id="" placeholder="请输入密码" name="user_pwd">
+                                            <%}%>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>头像</label>
+                                        <%if(isedit){%>
+                                            <img src="<%= model.img %>" id="imgCtrl" alt="图片" style="width:200px;max-height:200px;">
+                                            <input name="img" id="img" type="hidden" class="form-control" placeholder="请上传头像" value="<%= model.img %>">
+                                            <%} else{%>
+                                                <img src="/default.jpg" id="imgCtrl" alt="图片" style="width:200px;max-height:200px;">
+                                                <input name="img" id="img" type="hidden" class="form-control" placeholder="请上传头像">
+                                                <%}%>
+                                                    <a href="javascript:void(0)" value="上传" id="uploadButton">上传</a>
+
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>姓名</label>
+                                        <input type="text" class="form-control" id="" placeholder="请输入姓名" name="name" value="<%= model.name %>">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>昵称</label>
+                                        <input type="text" class="form-control" id="" placeholder="请输入昵称" name="nick_name" value="<%= model.nick_name %>">
+                                    </div>
+
+
+                                    <button type="submit" class="btn btn-info btn-block">保存</button>
+                            </form>
+            </div>
+        </div>
+    </div>
+    <% include ../../layout/admin/footer  %>
+        <script>
+            KindEditor.ready(function(K) {
+                var editor1 = K.create('textarea[name="content"]', {
+                    uploadJson: '/common/kindeditor/uploadImg' //处理文件上传的服务器地址
+                });
+                var uploadbutton = K.uploadbutton({
+                    button: K('#uploadButton')[0],
+                    fieldName: 'imgFile',
+                    url: '/common/kindeditor/uploadImg',
+                    afterUpload: function(data) {
+                        if (data.error === 0) {
+                            var url = data.url;
+                            K('#img').val(url);
+                            K('#imgCtrl').attr('src', url);
+                        } else {
+                            alert(data.message);
+                        }
+                    },
+                    afterError: function(str) {
+                        alert('自定义错误信息: ' + str);
+                    }
+                });
+                uploadbutton.fileBox.change(function(e) {
+                    uploadbutton.submit();
+                });
+                // 修改单独上传文件插件的样式
+                var upBtn = $('.ke-button').attr('class', '');
+                upBtn.addClass('btn btn-danger btn-sm ignore');
+                $('.ke-button-common').height('auto');
+                $('.ke-form').width('50px');
+            });
+            $('form').submit(function(ev) {
+                ev.preventDefault()
+                $.post(
+                    $(this).attr('action'),
+                    $(this).serialize(),
+                    (res) => {
+                        alert(res.msg)
+                        if (res.status == 'y') location.href = '/admin/members'
+                    }
+                )
+            })
+            $(function() {
+
+
+                // -- -- -- -- -- -- -- - validate验证-- -- -- -- -- -- -- -
+                $('#mainForm').validate({
+                    // debug: true,
+                    ignore: '.ignore,[type="file"]',
+                    rules: {
+                        user_name: {
+                            required: true,
+                            minlength: 3,
+                            //remote  远程验证，成功返回true，否则返回false
+                            // 默认发送get请求，把当前输入框中的内容传递到服务器
+                            remote: '/api/v1/validate/member_user_name'
+                        },
+                        email: {
+                            required: true,
+                            email: true,
+                            remote: '/api/v1/validate/member_email'
+                        },
+                        mobile: {
+                            required: true,
+                            isMobile: true, //使用自定义验证规则
+                            remote: '/api/v1/validate/member_mobile'
+                        },
+                        user_pwd: {
+                            required: true,
+                            isPwd: true,
+                        },
+                        name: {
+                            required: true,
+                            minlength: 2,
+                        },
+                        img: {
+                            // required: true,
+                        },
+                        nick_name: {
+                            required: true,
+                            minlength: 1,
+                        }
+                    },
+                    messages: {
+                        user_name: {
+                            remote: '该用户已经存在'
+                        },
+                        email: {
+                            remote: '该邮箱已被注册'
+                        },
+                        mobile: {
+                            remote: '该手机号已经被注册'
+                        }
+                    }
+                })
+            })
+        </script>
+</body>
+
+</html>

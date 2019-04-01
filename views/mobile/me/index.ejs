@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <% include ../../layout/mobile/header %>
+        <title>个人信息</title>
+</head>
+
+<body>
+    <div class="page">
+        <div class="header">
+            <h3>个人信息 </h3>
+        </div>
+    </div>
+    <div class="page__bd" style="margin-top:60px;">
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                    <img src="/default.jpg" style="width: 50px;display: block" id="img" />
+                </div>
+                <div class="weui-cell__bd">
+                    <p id="name">
+                        某人
+                    </p>
+                    <p style="font-size: 13px;color: #888888;" id="email">
+                        邮箱 buzhidao@163.com
+                        <span id="email"></span>
+                    </p>
+                </div>
+                <i class="fa fa-sign-in" id="sign" style="cursor:pointer;" onclick="location.href='/mobile/me/signin' ">  登录</i>
+            </div>
+            <div class="weui-cell weui-cell_access ">
+                <div class="weui-cell__bd ">
+                    <i class="fa fa-calendar-check-o "></i>
+                    <span style="vertical-align: middle ">我的订单</span>
+                    <span class="weui-badge " style="margin-left: 5px; ">3</span>
+                </div>
+                <div class="weui-cell__ft ">查看更多订单</div>
+            </div>
+            <div class="weui-cell weui-cell_access ">
+                <div class="weui-cell__bd ">
+                    <i class="fa fa-credit-card "></i>
+                    <span style="vertical-align: middle ">待付款</span>
+                    <span class="weui-badge " style="margin-left: 5px; ">1</span>
+                </div>
+                <div class="weui-cell__ft "></div>
+            </div>
+            <div class="weui-cell weui-cell_access ">
+                <div class="weui-cell__bd ">
+                    <i class="fa fa-plane "></i>
+                    <span style="vertical-align: middle ">待发货</span>
+                    <span class="weui-badge " style="margin-left: 5px; ">2</span>
+                </div>
+                <div class="weui-cell__ft "></div>
+            </div>
+            <div class="weui-cell weui-cell_access ">
+                <div class="weui-cell__bd ">
+                    <i class="fa fa-folder "></i>
+                    <span style="vertical-align: middle ">待收货</span>
+                    <span class="weui-badge " style="margin-left: 5px; ">3</span>
+                </div>
+                <div class="weui-cell__ft "></div>
+            </div>
+            <div class="weui-cell weui-cell_access ">
+                <div class="weui-cell__bd ">
+                    <i class="fa fa-hand-scissors-o "></i>
+                    <span style="vertical-align: middle ">待评价</span>
+                    <span class="weui-badge " style="margin-left: 5px; ">5</span>
+                </div>
+                <div class="weui-cell__ft "></div>
+            </div>
+            <div class="weui-cell weui-cell_access ">
+                <div class="weui-cell__bd ">
+                    <i class="fa fa-comment-o "></i>
+                    <span style="vertical-align: middle ">退款/售后</span>
+
+                </div>
+                <div class="weui-cell__ft "></div>
+            </div>
+            <div class="weui-cell weui-cell_access ">
+                <div class="weui-cell__bd ">
+                    <i class="fa fa-cog "></i>
+                    <span style="vertical-align: middle ">设置</span>
+
+                </div>
+                <div class="weui-cell__ft "></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <% const home = '/mobile/' %>
+        <% const shop = '/mobile/goods' %>
+            <% const goShop = 'javascript:;' %>
+                <% const me = 'javascript:;' %>
+                    <% include ../../layout/mobile/navbr %>
+                        <% include ../../layout/mobile/footer %>
+
+
+                            <script>
+                                $('#img').attr('src', $.cookie('memberImg'))
+                                $('#name').text($.cookie('member'))
+                                console.log($.cookie('memberEmail'))
+                                $('#email').text($.cookie('memberEmail'))
+                                $('#sign').removeClass('fa-sign-out').addClass('fa-sign-in').text('  登录').attr('onclick', 'location.href="/mobile/me/signin "')
+                                if ($.cookie('member')) {
+                                    $('#sign').removeClass('fa-sign-in').addClass('fa-sign-out').text('  注销').attr('onclick', 'signOut()')
+
+                                    function signOut() {
+                                        Cookies.remove('memberEmail')
+                                        Cookies.remove('memberImg')
+                                        Cookies.remove('member')
+
+                                        location.reload()
+                                    }
+                                }
+                            </script>
+</body>
+
+
+</html>

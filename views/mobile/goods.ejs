@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <% include ../layout/mobile/header %>
+        <title>超级商城-首页</title>
+</head>
+
+<body>
+    <!-- <div class="page">
+        <div class="header">
+            <h3>超级商城</h3>
+        </div>
+    </div> -->
+
+    <div class="page bd">
+        <div class="page__bd">
+            <!--<a href="javascript:;" class="weui-btn weui-btn_primary">点击展现searchBar</a>-->
+            <div class="weui-search-bar" id="searchBar">
+                <form class="weui-search-bar__form">
+                    <div class="weui-search-bar__box">
+                        <i class="weui-icon-search"></i>
+                        <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
+                        <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                    </div>
+                    <label class="weui-search-bar__label" id="searchText">
+												<i class="weui-icon-search"></i>
+												<span>搜索</span>
+										</label>
+                </form>
+                <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="page">
+        <div class="page__hd">
+            <p class="page__desc">商品列表</p>
+        </div>
+        <div class="page__bd">
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__bd">
+                    <% goodsData.forEach(function(item){%>
+                        <a href="/mobile/detail/<%= item.id%>" class="weui-media-box weui-media-box_appmsg">
+                            <div class="weui-media-box__hd">
+                                <img class="weui-media-box__thumb" src="<%= item.img%>">
+                            </div>
+                            <div class="weui-media-box__bd">
+                                <h4 class="weui-media-box__title">
+                                    <%= item.name %>
+                                </h4>
+                                <h6>
+                                    价格
+                                    <%= item.price %>￥
+                                </h6>
+
+                                <p class="weui-media-box__desc">
+                                    <%= item.description%>
+                                </p>
+                                <span class="font"> 库存 <span class="red"><%= item.store_count %></span></span>
+                            </div>
+                        </a>
+                        <%})%>
+                </div>
+            </div>
+        </div>
+        <div class="page" id="show">
+            <div class="page__bd page__bd_spacing">
+                <a class="weui-btn weui-btn_primary" id="btn" onclick="showPage();"><i class="weui-loading" style="display:none"></i>查看更多</a>
+                <!-- <a href="javascript:;" class="weui-btn weui-btn_primary weui-btn_loading"><i class="weui-loading"></i>页面主操作 Loading</a> -->
+            </div>
+        </div>
+        <% const home = '/mobile/' %>
+            <% const shop = 'javascript:;' %>
+                <% const goShop = 'javascript:;' %>
+                    <% const me = '/mobile/me' %>
+                        <% include ../layout/mobile/navbr %>
+                            <% include ../layout/mobile/footer %>
+                                <% include ../layout/mobile/seacher %>
+                                    <script>
+                                        var page = 1
+
+                                        function showPage() {
+                                            page++
+                                            console.log(page)
+                                            $('#btn').addClass('weui-btn_loading');
+                                            $('#btn i').show()
+                                            $.getJSON(
+                                                '/api/v1/goods', {
+                                                    page: page
+                                                },
+                                                function(res) {
+                                                    if (res.status = 'y') {
+                                                        console.log(res.data)
+                                                        $('#btn').removeClass('weui-btn_loading');
+                                                        $('#btn i').hide()
+                                                        var strHtml = ''
+                                                        res.data.list.forEach(function(item) {
+                                                            strHtml += `<a href="/mobile/detail/${item._id}" class="weui-media-box weui-media-box_appmsg">
+                            <div class="weui-media-box__hd">
+                                <img class="weui-media-box__thumb" src="${item.img}">
+                            </div>
+                            <div class="weui-media-box__bd">
+                                <h4 class="weui-media-box__title">
+                                    ${item.name}
+                                </h4>
+                                <h6>
+                                    价格
+																		${item.price}￥
+                                </h6>
+
+                                <p class="weui-media-box__desc">
+                                    ${item.description}
+                                </p>
+                                <span class="font"> 库存 <span class="red">${item.store_count}</span></span>
+                            </div>
+												</a>`
+
+                                                        })
+                                                        $(strHtml).appendTo('.weui-panel__bd')
+                                                        if (res.data.pageCount <= page) {
+                                                            $('#btn').text('没有更多信息了');
+                                                            $('#btn').addClass('weui-btn_disabled').removeClass('weui-btn_primary').css('color', 'gray')
+                                                            return page = res.data.pageCount
+
+                                                        }
+                                                    }
+                                                })
+                                        }
+                                    </script>
+
+</body>
+
+</html>
